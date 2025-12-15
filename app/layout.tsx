@@ -1,8 +1,6 @@
-// app/layout.tsx
+
 import "./globals.css"
-import LoadingWrapper from "@/app/_components/loading-wrapper"
 import { Inter } from "next/font/google"
-import localFont from "next/font/local"
 import { Noto_Sans_Mongolian } from 'next/font/google'
 
 const mongolian = Noto_Sans_Mongolian({ 
@@ -22,7 +20,7 @@ export default function RootLayout({
       
 
       <body className={`${inter.className} ${mongolian.className} antialiased bg-black text-white`}>
-        <LoadingWrapper>{children}</LoadingWrapper>
+       {children}
       </body>
     </html>
   )

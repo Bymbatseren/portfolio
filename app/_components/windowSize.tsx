@@ -1,4 +1,3 @@
-import { number } from 'framer-motion';
 import { useState, useEffect } from 'react';
 const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState<{

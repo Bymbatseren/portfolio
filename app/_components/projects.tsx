@@ -1,32 +1,11 @@
-import { useEffect, useState } from "react";
 import { FiExternalLink } from "react-icons/fi";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { motion } from "framer-motion";
-import { title } from "process";
+import { projects } from "./projects-data";
 
-type Project = {
-    _id: string;
-    title: string;
-    description: string;
-    imageUrl: string;
-    projectUrl: string;
-    techStack: string[];
-    githuburl: string;
-    isTeam: boolean;
-};
 
 export default function Projects() {
 
-    const projects = [
-        { title: "MNG-YOGA", description: "This website is designed to help users in Mongolia access yoga classes online anytime and from anywhere.", 
-            _id: "1",
-        imageUrl: "https://res.cloudinary.com/df88yvhqr/image/upload/v1765631361/coed3gbvpj1vlqoyzd0k.png",
-        projectUrl: "https://www.mngyoga.mn/",
-         techStack: ["React", "Node.js"],
-          githuburl: "https://github.com/pinecone-2a/MNG-YOGA",
-          isTeam : true}
-          
-    ]
     return <>
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-3 gap-5 mt-8">
             {projects.map((project, index) => (
@@ -71,8 +50,8 @@ export default function Projects() {
                             </a>
 
                             <a
-                                href={project.githuburl}
-                                target="_blank"
+                                href={`/detail/${project._id}`}
+                                
                                 className="inline-flex items-center mr-5 space-x-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/90 transition-all duration-200 hover:scale-105 active:scale-95"
                             >
                                 <span className="text-sm font-medium">Details</span>

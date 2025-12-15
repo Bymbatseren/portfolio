@@ -134,7 +134,7 @@ export default function GradientOrbsBackground() {
             ctx.arc(orb.x, orb.y, currentRadius, 0, Math.PI * 2);
             ctx.fill();
 
-            // Дотоод glow - зөөлөн
+            
             ctx.filter = 'blur(50px)';
             ctx.globalAlpha = 0.7;
             const innerGradient = ctx.createRadialGradient(
@@ -155,7 +155,7 @@ export default function GradientOrbsBackground() {
         const animate = () => {
             timeRef.current += 1;
 
-            // Background gradient
+           
             const bgGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
             bgGradient.addColorStop(0, '#0f0f1e');
             bgGradient.addColorStop(0.5, '#1a1a2e');
@@ -167,14 +167,14 @@ export default function GradientOrbsBackground() {
             const orbs = orbsRef.current;
 
             orbs.forEach((orb, index) => {
-                // Mouse parallax эффект
+              
                 const dx = mouse.x - canvas.width / 2;
                 const dy = mouse.y - canvas.height / 2;
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 const maxDistance = Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height) / 2;
                 const influence = Math.max(0, 1 - distance / maxDistance);
 
-                // Орбитийн хөдөлгөөн - илүү том радиус
+              
                 const orbitalSpeed = 0.00015;
                 const orbitalRadius = 80 + index * 40;
                 orb.targetX = orb.baseX +
@@ -182,21 +182,20 @@ export default function GradientOrbsBackground() {
                 orb.targetY = orb.baseY +
                     Math.sin(timeRef.current * orbitalSpeed + index * Math.PI / 2.5) * orbitalRadius;
 
-                // Mouse parallax нэмэх - илүү зөөлөн
+              
                 orb.targetX += dx * influence * 0.02 * (index % 2 === 0 ? 1 : -1);
                 orb.targetY += dy * influence * 0.02 * (index % 2 === 0 ? 1 : -1);
 
-                // Smooth transition - илүү зөөлөн
+                
                 orb.x += (orb.targetX - orb.x) * 0.01;
                 orb.y += (orb.targetY - orb.y) * 0.01;
 
-                // Rotation
+             
                 orb.rotation += orb.rotationSpeed;
 
                 drawOrb(orb, timeRef.current);
             });
 
-            // Noise texture overlay
             ctx.globalAlpha = 0.03;
             ctx.fillStyle = '#ffffff';
             for (let i = 0; i < 100; i++) {

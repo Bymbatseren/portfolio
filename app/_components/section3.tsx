@@ -1,273 +1,183 @@
-"use client"
-import { motion } from "framer-motion";
+"use client";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Mail, Send, Github, Linkedin, Twitter, Instagram } from "lucide-react";
+import {
+  Mail,
+  Send,
+  Github,
+  Instagram,
+  CheckCircle,
+  Loader2,
+  Facebook,
+} from "lucide-react";
 
 export default function Section3() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    message: ""
+    text: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
-  const handleSubmit = (e:any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    setIsLoading(true);
+
+    try {
+      const res = await fetch("/api/mail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        setShowSuccess(true);
+        setFormData({ name: "", email: "", text: "" });
+        setTimeout(() => setShowSuccess(false), 5000);
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const socials = [
-    { 
-      icon: <Github className="w-6 h-6" />, 
-      link: "https://github.com/bymbatseren", 
-      bgColor: "bg-white/10",
-      iconColor: "text-white"
-    },
-    { 
-      icon: <Instagram className="w-6 h-6" />, 
-      link: "#", 
-      bgColor: "bg-gradient-to-tr from-[#f58529] via-[#dd2a7b] to-[#515bd4]",
-      iconColor: "text-white"
-    },
-    { 
-      icon: <Linkedin className="w-6 h-6" />, 
-      link: "#", 
-      bgColor: "bg-[#1da1f2]/20",
-      iconColor: "text-[#1da1f2]"
-    }
-  ];
-
   return (
-     <motion.section
-            initial={{ opacity: 0, y: 80 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true, amount: 0.3 }}
-            className="w-full min-h-screen flex items-center justify-center px-4 py-12 md:py-20"
-        >
+    <motion.section
+      className="relative w-full min-h-screen flex items-center justify-center px-4 py-16 overflow-x-hidden"
+      initial={{ opacity: 0, y: 80 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+    >
+      <motion.div className="hidden md:block absolute top-20 left-20 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl" />
+      <motion.div className="hidden md:block absolute bottom-20 right-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
+      <motion.div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-pink-500/20 rounded-full blur-3xl" />
 
-      <motion.div
-        className="absolute top-20 left-20 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div
-        className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"
-        animate={{
-          scale: [1.2, 1, 1.2],
-          opacity: [0.5, 0.3, 0.5],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div
-        className="absolute top-1/2 left-1/2 w-80 h-80 bg-pink-500/20 rounded-full blur-3xl"
-        animate={{
-          scale: [1, 1.3, 1],
-          x: [-20, 20, -20],
-          y: [-20, 20, -20],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="max-w-2xl w-full relative z-10"
-      >
-
-        <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 sm:p-12 border border-white/10 shadow-2xl relative overflow-hidden">
-    
+     
+      <motion.div className="relative z-10 w-full max-w-2xl">
+        <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl p-6 sm:p-10 border border-white/10 shadow-2xl overflow-hidden">
+          
+        
           <motion.div
             className="absolute inset-0 rounded-3xl opacity-50"
             style={{
-              background: "linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6)",
-              backgroundSize: "300% 300%"
+              background:
+                "linear-gradient(90deg,#3b82f6,#8b5cf6,#ec4899,#3b82f6)",
+              backgroundSize: "300% 300%",
             }}
-            animate={{
-              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "linear"
-            }}
+            animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+            transition={{ duration: 5, repeat: Infinity }}
           >
-            <div className="absolute inset-0.5 bg-slate-900/95 rounded-3xl" />
+            <div className="absolute inset-[2px] bg-slate-900 rounded-3xl" />
           </motion.div>
 
-   
           <div className="relative z-10">
-         
-            <motion.div
-              initial={{ opacity: 0, y: -30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-center mb-8"
-            >
-              <motion.h1 
-                className="text-4xl sm:text-6xl font-bold bg-clip-text text-transparent bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 mb-3"
-                animate={{
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-                
-              >
-                Let's Talk
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                className="text-gray-300 text-base sm:text-lg"
-              >
-                Have a project in mind? Drop me a message!
-              </motion.p>
-            </motion.div>
-            <motion.div
+                      <h2 className="text-4xl sm:text-6xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
+              Let's Talk
+            </h2>
+            <p className="text-center text-gray-400 mt-3 mb-8">
+              Have a project in mind? Drop me a message!
+            </p>
+
+             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5, duration: 0.6 }}
               whileHover={{ scale: 1.02 }}
-              className="bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 backdrop-blur-lg rounded-2xl p-6 border border-white/10 mb-8 group cursor-pointer"
+              className="bg-linear-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 backdrop-blur-lg rounded-2xl p-4 sm:p-6 border border-white/10 mb-8 group cursor-pointer"
             >
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
                 <motion.div
-                  className="p-4 rounded-xl bg-blue-500/20"
+                  className="p-3 sm:p-4 rounded-xl bg-blue-500/20 shrink-0"
                   whileHover={{ rotate: [0, -10, 10, -10, 0] }}
                   transition={{ duration: 0.5 }}
                 >
-                  <Mail className="w-7 h-7 text-blue-400" />
+                  <Mail className="w-6 h-6 sm:w-7 sm:h-7 text-blue-400" />
                 </motion.div>
-                <div>
-                  <p className="text-gray-400 text-sm mb-1">Email me at</p>
-                  <p className="text-white font-semibold text-lg">hello@example.com</p>
+                <div className="w-full min-w-0">
+                  <p className="text-gray-400 text-xs sm:text-sm mb-1">Email me at</p>
+                  <p className="text-white font-semibold text-sm sm:text-base break-all sm:break-normal">
+                    byambatseren.personal@gmail.com
+                  </p>
                 </div>
               </div>
             </motion.div>
-            <motion.form
-              onSubmit={handleSubmit}
-              className="space-y-6 mb-8"
-            >
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.6 }}
-              >
-                <label className="block text-gray-300 mb-2 font-medium">Name</label>
-                <motion.input
-                  whileFocus={{ scale: 1.01, boxShadow: "0 0 0 3px rgba(139, 92, 246, 0.3)" }}
-                  type="text"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-5 py-3.5 bg-white/5 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-all"
-                  placeholder="Your name"
-                  required
-                />
-              </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.7 }}
-              >
-                <label className="block text-gray-300 mb-2 font-medium">Email</label>
-                <motion.input
-                  whileFocus={{ scale: 1.01, boxShadow: "0 0 0 3px rgba(139, 92, 246, 0.3)" }}
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-5 py-3.5 bg-white/5 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-all"
-                  placeholder="your@email.com"
-                  required
-                />
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.8 }}
-              >
-                <label className="block text-gray-300 mb-2 font-medium">Message</label>
-                <motion.textarea
-                  whileFocus={{ scale: 1.01, boxShadow: "0 0 0 3px rgba(139, 92, 246, 0.3)" }}
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  rows={5}
-                  className="w-full px-5 py-3.5 bg-white/5 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-all resize-none"
-                  placeholder="Tell me about your project..."
-                  required
-                />
-              </motion.div>
-
-              <motion.button
-                type="submit"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9 }}
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full py-4 bg-linear-to-r   cursor-pointer from-blue-500 via-purple-500 to-pink-500 rounded-xl text-white font-semibold flex items-center justify-center gap-2 relative overflow-hidden group shadow-lg shadow-purple-500/50"
-              >
+            <AnimatePresence>
+              {showSuccess && (
                 <motion.div
-                  className="absolute inset-0  bg-white"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "100%" }}
-                  transition={{ duration: 0.6 }}
-                  style={{ opacity: 0.2 }}
-                />
-                <span className=" relative z-10">Send Message</span>
-                <motion.div
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="mb-6 p-4 bg-green-500/20 border border-green-500/40 rounded-xl flex items-center gap-3"
                 >
-                  <Send className="w-5 h-5" />
+                  <CheckCircle className="text-green-400" />
+                  <span className="text-green-300">
+                    Message sent successfully!
+                  </span>
                 </motion.div>
-              </motion.button>
-            </motion.form>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1 }}
-              className="text-center"
-            >
-              <p className="text-gray-400 mb-4 text-sm">Or connect with me on</p>
-              <div className="flex justify-center gap-4">
-                {socials.map((social, index) => (
-                  <motion.a
-                    key={index}
-                    target="_blank"
-                    href={social.link}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 1.1 + index * 0.1, type: "spring" }}
-                    whileHover={{ scale: 1.2, rotate: 360 }}
-                    whileTap={{ scale: 0.9 }}
-                    className={`p-3 rounded-xl ${social.bgColor} ${social.iconColor} transition-all`}
-                  >
-                    {social.icon}
-                  </motion.a>
-                ))}
-              </div>
-            </motion.div>
+              )}
+            </AnimatePresence>
+
+            
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <input
+                className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white outline-none"
+                placeholder="Your name"
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+                required
+              />
+
+              <input
+                type="email"
+                className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white outline-none"
+                placeholder="Email address"
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
+                required
+              />
+
+              <textarea
+                rows={4}
+                className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white outline-none resize-none"
+                placeholder="Your message"
+                value={formData.text}
+                onChange={(e) =>
+                  setFormData({ ...formData, text: e.target.value })
+                }
+                required
+              />
+
+              <button
+                disabled={isLoading}
+                className="w-full py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl text-white font-semibold flex justify-center gap-2"
+              >
+                {isLoading ? (
+                  <Loader2 className="animate-spin" />
+                ) : (
+                  <>
+                    Send Message <Send />
+                  </>
+                )}
+              </button>
+            </form>
+
+            <div className="flex justify-center gap-4 mt-8">
+              <a href="https://github.com/bymbatseren" target="_blank">
+                <Github />
+              </a>
+              <a href="https://instagram.com/bymbatseren_u" target="_blank">
+                <Instagram />
+              </a>
+              <a href="https://facebook.com" target="_blank">
+                <Facebook />
+              </a>
+            </div>
           </div>
         </div>
       </motion.div>

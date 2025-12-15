@@ -53,7 +53,7 @@ export default function Home() {
       />
       
       <div ref={section1Ref}>
-        <Section1/>
+        <Section1 onContactClick={handleContactClick} onProjectsClick={handleProjectsClick}/>
       </div>
       
       <ParticleBackground/>
@@ -64,6 +64,9 @@ export default function Home() {
 
       <div ref={section3Ref}>
         <Section3/>
+      </div>
+      <div className="text-sm text-gray-500 bottom-0 flex justify-center items-center">
+        inspired by abhishekganvi
       </div>
     </>
   );

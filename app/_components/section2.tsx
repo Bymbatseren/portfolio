@@ -1,10 +1,6 @@
 "use client"
 import { motion } from "framer-motion";
-import { Code2, Database, Layers, Zap } from "lucide-react";
-import { set } from "mongoose";
-import { useEffect, useState } from "react";
-import { FiExternalLink } from "react-icons/fi";
-import { IoIosArrowRoundForward } from "react-icons/io";
+import { useState } from "react";
 import Projects from "./projects";
 import Certificates from "./certificate";
 import TechStack from "./tech-stack";
@@ -14,9 +10,6 @@ import TechStack from "./tech-stack";
 
 export default function Section2() {
     const [pagination, setPagination] = useState<Number>(1)
-
-
-
     return (
         <motion.section
             initial={{ opacity: 0, y: 80 }}

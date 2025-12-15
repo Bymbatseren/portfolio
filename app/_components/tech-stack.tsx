@@ -15,7 +15,7 @@ export default function TechStack() {
     { name: "GitHub", icon: <StackIcon name="github" /> },
   ];
 
-  // TypeScript-д зөв spring transition
+
   const spring: Transition = {
     type: "spring",
     stiffness: 250,
@@ -34,7 +34,7 @@ export default function TechStack() {
           whileHover={{ scale: 1.08, boxShadow: "0 20px 30px rgba(139,92,246,0.35)" }}
           className="relative flex flex-col items-center justify-center p-8 bg-white/10 rounded-2xl border border-white/20 cursor-pointer overflow-hidden"
         >
-          {/* Gradient background */}
+        
           <motion.div
             className="absolute inset-0 rounded-2xl blur-2xl opacity-20"
             whileHover={{ opacity: 0.35, scale: 1.05 }}
@@ -44,7 +44,7 @@ export default function TechStack() {
             }}
           />
 
-          {/* Icon */}
+     
           <motion.div
             className="relative z-10 text-5xl w-12 h-12 mb-4 text-white"
             whileHover={{ rotate: 10 }}
@@ -53,7 +53,7 @@ export default function TechStack() {
             {tech.icon}
           </motion.div>
 
-          {/* Tech name */}
+        
           <motion.p
             className="relative z-10 text-white font-semibold"
             whileHover={{ y: -2 }}

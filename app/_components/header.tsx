@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "./logo";
 import useWindowSize from "./windowSize";
+import { ChevronDown } from "lucide-react";
 
 interface HeaderProps {
   onHomeClick?: () => void;
@@ -74,7 +75,7 @@ export default function Header({
       <div className="w-full px-6 sm:px-10 py-5 flex justify-between items-center">
         
         <div className="text-white text-xl sm:text-2xl font-black tracking-tight">
-          <Logo width={30} height={30}/>
+          <div className="w-7.5 h-7.5"></div>
         </div>
 
         <div className="relative"> 
