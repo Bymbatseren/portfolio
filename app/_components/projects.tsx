@@ -32,12 +32,30 @@ export default function Projects() {
                             />
                         </div>
 
-                        <div className="ml-4">
-                            <p className="font-bold">{project.title}</p>
-                            <div className="text-gray-300/80 text-sm leading-relaxed line-clamp-2">
+                        <div className="ml-4 mr-4">
+                            <div className="flex justify-between items-center">
+                                <p className="font-bold">{project.title}</p>
+
+                                {project.isTeam === true && (
+                                    <div className="
+                                    flex items-center justify-center gap-1
+                                              px-2 py-0.5
+                                        text-xs font-medium
+                                     rounded-full
+                                    bg-emerald-500/10
+                                        text-purple-300
+                                         border border-purple-300/90
+      ">
+                                        👥 Team
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="text-gray-300/80 text-sm leading-relaxed line-clamp-2 mt-1">
                                 {project.description}
                             </div>
                         </div>
+
 
                         <div className="flex justify-between mt-5 mb-5">
                             <a
@@ -51,7 +69,7 @@ export default function Projects() {
 
                             <a
                                 href={`/detail/${project._id}`}
-                                
+
                                 className="inline-flex items-center mr-5 space-x-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/90 transition-all duration-200 hover:scale-105 active:scale-95"
                             >
                                 <span className="text-sm font-medium">Details</span>

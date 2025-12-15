@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Logo from "./logo";
 import useWindowSize from "./windowSize";
-import { ChevronDown } from "lucide-react";
+
 
 interface HeaderProps {
   onHomeClick?: () => void;

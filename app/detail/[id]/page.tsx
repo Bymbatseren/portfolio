@@ -37,9 +37,26 @@ export default function DetailPage() {
 
                             <div className="grid mt-20 lg:grid-cols-2 gap-8 md:gap-20">
                                 <div className="space-y-4 md:space-y-6">
-                                    <h1 className="text-3xl md:text-6xl font-bold bg-linear-to-r from-blue-200 via-purple-200 to-pink-200 bg-clip-text text-transparent leading-tight">
+                                    <div className="flex gap-5 items-center">
+                                        <h1 className="text-3xl md:text-6xl font-bold bg-linear-to-r from-blue-200 via-purple-200 to-pink-200 bg-clip-text text-transparent leading-tight">
                                         {project.title}
                                     </h1>
+                                    <div>
+                                        {project.isTeam === true && (
+                                    <div className="
+                                    flex items-center justify-center gap-1
+                                              px-2 py-0.5
+                                        text-xs font-medium
+                                     rounded-full
+                                    bg-emerald-500/10
+                                        text-purple-300
+                                         border border-purple-300/90
+      ">
+                                        👥 Team
+                                    </div>
+                                )}
+                                    </div>
+                                    </div>
                                     <div className="relative h-1 w-16 md:w-24">
                                         <div className="absolute inset-0 bg-linear-to-r from-blue-500 to-purple-500 rounded-full animate-pulse"></div>
                                         <div className="absolute inset-0 bg-linear-to-r from-blue-500 to-purple-500 rounded-full blur-sm"></div>
